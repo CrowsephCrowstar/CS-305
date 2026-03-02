@@ -1,1 +1,21 @@
 # CS-305
+Briefly summarize your client, Artemis Financial, and its software requirements. Who was the client? What issue did the company want you to address?
+Artemis Financial is a financial services company that required a secure web application capable of protecting sensitive client data during transmission. The core issue was that their existing Spring Boot application lacked secure communications (HTTPS/TLS) and had no data integrity verification mechanism. I were tasked with implementing SHA-256 checksum verification, generating an SSL/TLS certificate, enabling HTTPS on port 8443, and scanning for known dependency vulnerabilities.
+
+What did you do well when you found your client’s software security vulnerabilities? Why is it important to code securely? What value does software security add to a company’s overall well-being?
+I did well by following industry standards closely — using SHA-256 (still NIST-compliant as of 2024), generating a 2048-bit RSA key pair, and properly configuring SSL in Spring Boot. Secure coding matters because vulnerabilities in financial software can expose client data, lead to regulatory penalties, and destroy institutional trust. For a company like Artemis Financial, software security directly protects assets, client relationships, and long-term business viability.
+
+Which part of the vulnerability assessment was challenging or helpful to you?
+The OWASP Dependency-Check scan was likely both the most challenging and most helpful part. It required configuring the Maven plugin, understanding CVE severity levels, and distinguishing true vulnerabilities from false positives — a nuanced skill. It was helpful because it gave a systematic, evidence-based view of the dependency risk surface rather than relying on guesswork.
+
+How did you increase layers of security? In the future, what would you use to assess vulnerabilities and decide which mitigation techniques to use?
+I added multiple security layers: HTTPS via TLS/SSL, SHA-256 for data integrity, a PKCS12 keystore for certificate management, and static dependency scanning via OWASP. In the future, I would use the OWASP Dependency-Check (or tools like Snyk or SonarQube) to identify CVEs, then use a risk-based framework — prioritizing HIGH/CRITICAL findings, checking whether vulnerabilities are exploitable in context, and applying mitigations like version upgrades or input validation.
+
+How did you make certain the code and software application were functional and secure? After refactoring the code, how did you check to see whether you introduced new vulnerabilities?
+I verified functionality by compiling the project with Maven (zero build errors), manually testing the /hash endpoint via browser at https://localhost:8443/hash, and confirming HTTPS was active. After refactoring, I ran the OWASP Dependency-Check again and confirmed no new vulnerabilities were introduced — all findings were pre-existing or false positives.
+
+What resources, tools, or coding practices did you use that might be helpful in future assignments or tasks?
+Java Keytool for certificate generation. OWASP Dependency-Check Maven plugin for CVE scanning. Java MessageDigest API for SHA-256 implementation. Spring Boot application.properties for SSL configuration. SecureRandom for cryptographically strong key generation. NIST and NVD as authoritative references for algorithm and vulnerability standards. These are all directly transferable to any enterprise Java or Spring-based security project.
+
+Employers sometimes ask for examples of work that you have successfully completed to show your skills, knowledge, and experience. What might you show future employers from this assignment?
+This project is a strong portfolio piece because it demonstrates end-to-end secure software development: threat identification, cryptographic implementation, certificate management, HTTPS configuration, and post-refactor validation. Specifically, I could highlight the SHA-256 hash endpoint implementation, the SSL/TLS configuration in Spring Boot, and the OWASP dependency scan report as concrete evidence of my ability to assess and harden a real application — skills directly relevant to roles in software engineering, DevSecOps, or application security.
